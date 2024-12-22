@@ -2,6 +2,7 @@ package me.axiumyu.listener
 
 import com.destroystokyo.paper.MaterialTags
 import com.destroystokyo.paper.MaterialTags.ARMOR
+import me.axiumyu.Util.DEATH_COUNT
 import me.axiumyu.Util.KEEP_ARM_TIMES
 import me.axiumyu.Util.KEEP_EXP_TIMES
 import me.axiumyu.Util.KEEP_INV_TIMES
@@ -18,9 +19,11 @@ object PlayerDeath : Listener {
     fun onPlayerDeath(e: PlayerDeathEvent) {
         e.keepInventory = false
         e.keepLevel = false
-        val keepInv = e.player.pdc().getOrDefault(KEEP_INV_TIMES, PersistentDataType.INTEGER, 0)
-        val keepExp = e.player.pdc().getOrDefault(KEEP_EXP_TIMES, PersistentDataType.INTEGER, 0)
-        val keepArm = e.player.pdc().getOrDefault(KEEP_ARM_TIMES, PersistentDataType.INTEGER, 0)
+        e.player.addPDC(DEATH_COUNT)
+        val pdc = e.player.pdc()
+        val keepInv = pdc.getOrDefault(KEEP_INV_TIMES, PersistentDataType.INTEGER, 0)
+        val keepExp = pdc.getOrDefault(KEEP_EXP_TIMES, PersistentDataType.INTEGER, 0)
+        val keepArm = pdc.getOrDefault(KEEP_ARM_TIMES, PersistentDataType.INTEGER, 0)
         if (keepInv > 0) {
             e.keepInventory = true
             e.player.addPDC(KEEP_INV_TIMES, -1)

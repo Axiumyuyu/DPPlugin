@@ -25,7 +25,7 @@ class DPPlugin : JavaPlugin(), Listener {
             -------------------------------------------------------------------
             """.trimIndent()
         }
-        listOf(DeathCounter, KillListener, PlayerInit, SpawnListener, ThrowableFireBall).forEach {
+        listOf(KillListener, PlayerInit, SpawnListener, ThrowableFireBall, PlayerDeath).forEach {
             server.pluginManager.registerEvents(it, this)
         }
         mapOf(

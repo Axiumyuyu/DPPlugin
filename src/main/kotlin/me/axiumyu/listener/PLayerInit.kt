@@ -28,8 +28,6 @@ object PlayerInit : Listener {
                 set(KILL_RARE, INTEGER, 0)
                 set(KILL_EPIC, INTEGER, 0)
                 set(KILL_LEGENDARY, INTEGER, 0)
-                //TEMP
-//                set(ITEM_NUMBER, INTEGER, 1)
             }
         }
     }
