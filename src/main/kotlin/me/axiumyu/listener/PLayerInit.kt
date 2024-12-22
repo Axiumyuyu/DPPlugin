@@ -22,7 +22,7 @@ object PlayerInit : Listener {
             if (!has(FIRST,BOOLEAN)){
                 set(FIRST, BOOLEAN, true)
                 set(DEATH_COUNT, INTEGER, 0)
-                set(STATE, INTEGER, 0)
+                set(STATE, STRING, "")
                 set(KILL_COMMON, INTEGER, 0)
                 set(KILL_UNCOMMON, INTEGER, 0)
                 set(KILL_RARE, INTEGER, 0)

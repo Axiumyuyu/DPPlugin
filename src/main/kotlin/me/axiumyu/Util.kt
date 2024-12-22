@@ -57,27 +57,27 @@ object Util {
 
     @JvmStatic
     fun isCommon(entity: LivingEntity): Boolean {
-        return entity.name.contains("common")
+        return entity.scoreboardTags.contains("common")
     }
 
     @JvmStatic
     fun isUncommon(entity: LivingEntity): Boolean {
-        return entity.name.contains("uncommon")
+        return entity.scoreboardTags.contains("uncommon")
     }
 
     @JvmStatic
     fun isRare(entity: LivingEntity): Boolean {
-        return entity.name.contains("rare")
+        return entity.scoreboardTags.contains("rare")
     }
 
     @JvmStatic
     fun isEpic(entity: LivingEntity): Boolean {
-        return entity.name.contains("epic")
+        return entity.scoreboardTags.contains("epic")
     }
 
     @JvmStatic
     fun isLegendary(entity: LivingEntity): Boolean {
-        return entity.name.contains("legendary")
+        return entity.scoreboardTags.contains("legendary")
     }
 
     @JvmStatic
