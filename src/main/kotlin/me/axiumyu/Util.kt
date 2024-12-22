@@ -6,6 +6,8 @@ import org.bukkit.entity.LivingEntity
 import org.bukkit.persistence.PersistentDataContainer
 import org.bukkit.persistence.PersistentDataHolder
 import org.bukkit.persistence.PersistentDataType.INTEGER
+import org.bukkit.plugin.java.JavaPlugin.getPlugin
+import org.bukkit.scheduler.BukkitRunnable
 import org.bukkit.util.Vector
 
 import kotlin.math.cos
@@ -47,6 +49,12 @@ object Util {
     @JvmField
     val KEEP_INV_TIMES = axiumyuKey("keep_inv_times")
 
+    @JvmField
+    val KEEP_EXP_TIMES = axiumyuKey("keep_exp_times")
+
+    @JvmField
+    val KEEP_ARM_TIMES = axiumyuKey("keep_arm_times")
+
     /**
      *  键盘自己打字.jpg
      */
@@ -56,29 +64,25 @@ object Util {
     }
 
     @JvmStatic
-    fun isCommon(entity: LivingEntity): Boolean {
-        return entity.scoreboardTags.contains("common")
+    fun <T : PersistentDataHolder> T.addPDC(nameSpace : NamespacedKey, number: Int = 1) {
+        this.pdc().set(nameSpace, INTEGER, this.pdc().get(nameSpace, INTEGER)!! + number)
     }
 
     @JvmStatic
-    fun isUncommon(entity: LivingEntity): Boolean {
-        return entity.scoreboardTags.contains("uncommon")
-    }
+    fun isCommon(entity: LivingEntity) = entity.scoreboardTags.contains("common")
 
     @JvmStatic
-    fun isRare(entity: LivingEntity): Boolean {
-        return entity.scoreboardTags.contains("rare")
-    }
+    fun isUncommon(entity: LivingEntity) = entity.scoreboardTags.contains("uncommon")
 
     @JvmStatic
-    fun isEpic(entity: LivingEntity): Boolean {
-        return entity.scoreboardTags.contains("epic")
-    }
+    fun isRare(entity: LivingEntity) = entity.scoreboardTags.contains("rare")
 
     @JvmStatic
-    fun isLegendary(entity: LivingEntity): Boolean {
-        return entity.scoreboardTags.contains("legendary")
-    }
+    fun isEpic(entity: LivingEntity) = entity.scoreboardTags.contains("epic")
+
+    @JvmStatic
+    fun isLegendary(entity: LivingEntity) = entity.scoreboardTags.contains("legendary")
+
 
     @JvmStatic
     fun pitchYaw2Vector(pitch: Number, yaw: Number): Vector {
@@ -97,8 +101,8 @@ object Util {
     }
 
     @JvmStatic
-    fun addPDC(source: PersistentDataHolder, nameSpace : NamespacedKey, number: Int = 1) {
-        source.pdc().set(nameSpace, INTEGER, source.pdc().get(nameSpace, INTEGER)!! + number)
+    inline fun laterTask(delay : Long, crossinline action : ()-> Unit) {
+        object : BukkitRunnable() { override fun run() { action() } }.runTaskLater(getPlugin(DPPlugin::class.java), delay)
     }
 
     enum class Color(rgb: Int){

@@ -5,12 +5,12 @@ import me.axiumyu.Util.KILL_EPIC
 import me.axiumyu.Util.KILL_LEGENDARY
 import me.axiumyu.Util.KILL_RARE
 import me.axiumyu.Util.KILL_UNCOMMON
-import me.axiumyu.Util.addPDC
 import me.axiumyu.Util.isCommon
 import me.axiumyu.Util.isEpic
 import me.axiumyu.Util.isLegendary
 import me.axiumyu.Util.isRare
 import me.axiumyu.Util.isUncommon
+import me.axiumyu.Util.addPDC
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -23,15 +23,15 @@ object KillListener : Listener {
         val killer = event.entity.killer
         if (killer !is Player) return
         when {
-            isCommon(event.entity) -> addPDC(killer, KILL_COMMON)
+            isCommon(event.entity) -> killer.addPDC(KILL_COMMON)
 
-            isUncommon(event.entity) -> addPDC(killer, KILL_UNCOMMON)
+            isUncommon(event.entity) -> killer.addPDC(KILL_UNCOMMON)
 
-            isRare(event.entity) -> addPDC(killer, KILL_RARE)
+            isRare(event.entity) -> killer.addPDC(KILL_RARE)
 
-            isEpic(event.entity) -> addPDC(killer, KILL_EPIC)
+            isEpic(event.entity) -> killer.addPDC(KILL_EPIC)
 
-            isLegendary(event.entity) -> addPDC(killer, KILL_LEGENDARY)
+            isLegendary(event.entity) -> killer.addPDC(KILL_LEGENDARY)
         }
     }
 }

@@ -1,6 +1,7 @@
 package me.axiumyu
 
 import com.google.gson.Gson
+import me.axiumyu.command.PLayerStart
 import me.axiumyu.listener.*
 import net.kyori.adventure.text.minimessage.MiniMessage
 import org.bukkit.event.Listener
@@ -14,7 +15,6 @@ class DPPlugin : JavaPlugin(), Listener {
     }
 
     override fun onEnable() {
-
         logger.severe {
             """
             -------------------------------------------------------------------
@@ -28,10 +28,10 @@ class DPPlugin : JavaPlugin(), Listener {
         listOf(DeathCounter, KillListener, PlayerInit, SpawnListener, ThrowableFireBall).forEach {
             server.pluginManager.registerEvents(it, this)
         }
-        saveDefaultConfig()
-    }
+        mapOf(
+            "start" to PLayerStart,
 
-    override fun onDisable() {
-        // Plugin shutdown logic
+        ).forEach{ getCommand(it.key)?.setExecutor(it.value)}
+        saveDefaultConfig()
     }
 }
