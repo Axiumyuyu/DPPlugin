@@ -41,9 +41,6 @@ object Util {
     val KILL_LEGENDARY = axiumyuKey("kill_legendary")
 
     @JvmField
-    val ITEM_NUMBER = axiumyuKey("item_number")
-
-    @JvmField
     val FIRST = axiumyuKey("first")
 
     @JvmField

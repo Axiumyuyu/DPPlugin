@@ -24,9 +24,9 @@ object PLayerStart : CommandExecutor {
             pdc().set(STATE, PersistentDataType.STRING, "started")
             teleport(Location(world, 0.0, 1.0, 0.0))
             respawnLocation = location
-        }
-        laterTask(36000) {
-            p0.pdc().set(STATE, PersistentDataType.STRING,"vulnerable")
+            laterTask(36000) {
+                pdc().set(STATE, PersistentDataType.STRING,"vulnerable")
+            }
         }
         return true
     }
